@@ -1,0 +1,368 @@
+{
+	"info": {
+		"_postman_id": "fb9478ef-3867-48d2-8014-ba4753070c2a",
+		"name": "OpenEMR",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28280818"
+	},
+	"item": [
+		{
+			"name": "Register API Client",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"application_type\": \"private\",\r\n    \"redirect_uris\": [\r\n        \"http://localhost\"\r\n    ],\r\n    \"post_logout_redirect_uris\": [\r\n        \"http://localhost\"\r\n    ],\r\n    \"initiate_login_uri\": \"https://localhost\",\r\n    \"client_name\": \"external-web-app-tester-v2\",\r\n    \"token_endpoint_auth_method\": \"client_secret_post\",\r\n    \"username\": \"MKI-admin-52\",\r\n    \"password\": \"passwordpassword\",\r\n    \"contacts\": [\"random@random.com\"],\r\n    \"scope\": \"openid api:oemr api:fhir api:port user/allergy.read user/allergy.write user/appointment.read user/appointment.write user/dental_issue.read user/dental_issue.write user/document.read user/document.write user/drug.read user/encounter.read user/encounter.write user/facility.read user/facility.write user/immunization.read user/insurance.read user/insurance.write user/insurance_company.read user/insurance_company.write user/insurance_type.read user/list.read user/medical_problem.read user/medical_problem.write user/medication.read user/medication.write user/message.write user/patient.read user/patient.write user/practitioner.read user/practitioner.write user/prescription.read user/procedure.read user/soap_note.read user/soap_note.write user/surgery.read user/surgery.write user/vital.read user/vital.write user/AllergyIntolerance.read user/CareTeam.read user/Condition.read user/Encounter.read user/Immunization.read user/Location.read user/Medication.read user/MedicationRequest.read user/Observation.read user/Organization.read user/Organization.write user/Patient.read user/Patient.write user/Practitioner.read user/Practitioner.write user/PractitionerRole.read user/Procedure.read patient/encounter.read patient/patient.read patient/Encounter.read patient/Patient.read\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost/openemr/oauth2/default/registration",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"openemr",
+						"oauth2",
+						"default",
+						"registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Access Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "NaH9lIiOrRc_opTYp3fcr7kXcy2nbtNqKXqtJc60FIU",
+							"type": "default"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "default"
+						},
+						{
+							"key": "user_role",
+							"value": "users",
+							"type": "default"
+						},
+						{
+							"key": "scope",
+							"value": "offline_access openid api:oemr api:fhir api:port user/allergy.read user/allergy.write user/appointment.read user/appointment.write user/dental_issue.read user/dental_issue.write user/document.read user/document.write user/drug.read user/encounter.read user/encounter.write user/facility.read user/facility.write user/immunization.read user/insurance.read user/insurance.write user/insurance_company.read user/insurance_company.write user/insurance_type.read user/list.read user/medical_problem.read user/medical_problem.write user/medication.read user/medication.write user/message.write user/patient.read user/patient.write user/practitioner.read user/practitioner.write user/prescription.read user/procedure.read user/soap_note.read user/soap_note.write user/surgery.read user/surgery.write user/vital.read user/vital.write user/AllergyIntolerance.read user/CareTeam.read user/Condition.read user/Encounter.read user/Immunization.read user/Location.read user/Medication.read user/MedicationRequest.read user/Observation.read user/Organization.read user/Organization.write user/Patient.read user/Patient.write user/Practitioner.read user/Practitioner.write user/PractitionerRole.read user/Procedure.read patient/encounter.read patient/patient.read patient/Encounter.read patient/Patient.read",
+							"type": "default"
+						},
+						{
+							"key": "username",
+							"value": "MKI-admin-52",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "passwordpassword",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/openemr/oauth2/default/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"openemr",
+						"oauth2",
+						"default",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Standard REST - Get Patient Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/openemr/apis/default/api/patient",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"openemr",
+						"apis",
+						"default",
+						"api",
+						"patient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FHIR - Add Practitioner",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"9473b0cf-e969-4eaa-8044-51037767fb4f\",\r\n  \"meta\": {\r\n    \"versionId\": \"1\",\r\n    \"lastUpdated\": \"2022-09-21T17:41:57+00:00\"\r\n  },\r\n  \"resourceType\": \"Practitioner\",\r\n  \"text\": {\r\n    \"status\": \"generated\",\r\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\"> <p>John Doe</p></div>\"\r\n  },\r\n  \"identifier\": [\r\n    {\r\n      \"system\": \"http://hl7.org/fhir/sid/us-npi\",\r\n      \"value\": \"11223344554544\"\r\n    }\r\n  ],\r\n  \"active\": true,\r\n  \"name\": [\r\n    {\r\n      \"use\": \"official\",\r\n      \"family\": \"Doe\",\r\n      \"given\": [\r\n        \"John\"\r\n      ]\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/openemr/apis/default/fhir/Practitioner",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"openemr",
+						"apis",
+						"default",
+						"fhir",
+						"Practitioner"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FHIR - Add Patient",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"95f22ff4-dd25-4290-8b52-1dd2fedf8e55\",\r\n  \"meta\": {\r\n    \"versionId\": \"1\",\r\n    \"lastUpdated\": \"2022-05-31T02:48:28+00:00\"\r\n  },\r\n  \"resourceType\": \"Patient\",\r\n  \"text\": {\r\n    \"status\": \"generated\",\r\n    \"div\": \"<div xmlns='http://www.w3.org/1999/xhtml'> <p>John Smith</p></div>\"\r\n  },\r\n  \"extension\": [\r\n    {\r\n      \"valueCode\": \"F\",\r\n      \"url\": \"http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex\"\r\n    },\r\n    {\r\n      \"extension\": [\r\n        {\r\n          \"valueCoding\": {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/v3-NullFlavor\",\r\n            \"code\": \"UNK\",\r\n            \"display\": \"Unknown\"\r\n          },\r\n          \"url\": \"ombCategory\"\r\n        },\r\n        {\r\n          \"valueString\": \"Unknown\",\r\n          \"url\": \"text\"\r\n        }\r\n      ],\r\n      \"url\": \"http://hl7.org/fhir/us/core/StructureDefinition/us-core-race\"\r\n    }\r\n  ],\r\n  \"identifier\": [\r\n    {\r\n      \"use\": \"official\",\r\n      \"type\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n            \"code\": \"PT\"\r\n          }\r\n        ]\r\n      },\r\n      \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n      \"value\": \"1\"\r\n    }\r\n  ],\r\n  \"active\": true,\r\n  \"name\": [\r\n    {\r\n      \"use\": \"official\",\r\n      \"family\": \"Smith\",\r\n      \"given\": [\r\n        \"John\"\r\n      ]\r\n    }\r\n  ],\r\n  \"gender\": \"male\",\r\n  \"birthDate\": \"2017-04-10\",\r\n  \"communication\": [\r\n    {\r\n      \"language\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/data-absent-reason\",\r\n            \"code\": \"unknown\",\r\n            \"display\": \"Unknown\"\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/openemr/apis/default/fhir/Patient",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"openemr",
+						"apis",
+						"default",
+						"fhir",
+						"Patient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FHIR - Get All Practitioner Info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/openemr/apis/default/fhir/Practitioner",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"openemr",
+						"apis",
+						"default",
+						"fhir",
+						"Practitioner"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FHIR - Get All Patient",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/openemr/apis/default/fhir/Patient",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"openemr",
+						"apis",
+						"default",
+						"fhir",
+						"Patient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FHIR - Update Patient Information",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\":\"{{Patient_Id}}\",\r\n  \"meta\": {\r\n    \"versionId\": \"1\",\r\n    \"lastUpdated\": \"2022-03-31T02:48:28+00:00\"\r\n  },\r\n  \"resourceType\": \"Patient\",\r\n  \"text\": {\r\n    \"status\": \"generated\",\r\n    \"div\": \"<div xmlns='http://www.w3.org/1999/xhtml'> <p>Brenda Smith</p></div>\"\r\n  },\r\n  \"extension\": [\r\n    {\r\n      \"valueCode\": \"F\",\r\n      \"url\": \"http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex\"\r\n    },\r\n    {\r\n      \"extension\": [\r\n        {\r\n          \"valueCoding\": {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/v3-NullFlavor\",\r\n            \"code\": \"UNK\",\r\n            \"display\": \"Unknown\"\r\n          },\r\n          \"url\": \"ombCategory\"\r\n        },\r\n        {\r\n          \"valueString\": \"Unknown\",\r\n          \"url\": \"text\"\r\n        }\r\n      ],\r\n      \"url\": \"http://hl7.org/fhir/us/core/StructureDefinition/us-core-race\"\r\n    }\r\n  ],\r\n  \"identifier\": [\r\n    {\r\n      \"use\": \"official\",\r\n      \"type\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n            \"code\": \"PT\"\r\n          }\r\n        ]\r\n      },\r\n      \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n      \"value\": \"1\"\r\n    }\r\n  ],\r\n  \"active\": true,\r\n  \"name\": [\r\n    {\r\n      \"use\": \"official\",\r\n      \"family\": \"Smith\",\r\n      \"given\": [\r\n        \"Brenda-2\"\r\n      ]\r\n    }\r\n  ],\r\n  \"gender\": \"female\",\r\n  \"birthDate\": \"2017-03-10\",\r\n  \"communication\": [\r\n    {\r\n      \"language\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/data-absent-reason\",\r\n            \"code\": \"unknown\",\r\n            \"display\": \"Unknown\"\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost/openemr/apis/default/fhir/Patient/{{Patient_Id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"openemr",
+						"apis",
+						"default",
+						"fhir",
+						"Patient",
+						"{{Patient_Id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{Bearer_Token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Refresh the OAuth token if necessary",
+					"var tokenDate = new Date(2010,1,1);",
+					"var tokenTimestamp = pm.environment.get(\"Bearer_Token_Timestamp\");",
+					"if(tokenTimestamp){",
+					"  tokenDate = Date.parse(tokenTimestamp);",
+					"}",
+					"var expiresInTime = pm.environment.get(\"ExpiresInTime\");",
+					"if(!expiresInTime){",
+					"    expiresInTime = 3600; // Set default expiration time to 5 minutes",
+					"}",
+					"if((new Date() - tokenDate) >= expiresInTime) ",
+					"{",
+					"   pm.sendRequest({",
+					"      url:  pm.variables.get(\"Auth_Url\"), ",
+					"      method: 'POST',",
+					"      header: {",
+					"        'Accept': 'application/json',",
+					"        'Content-Type': 'application/x-www-form-urlencoded',",
+					"        'Authorization': pm.environment.get(\"Bearer_Token\")",
+					"        ",
+					"      },",
+					"      body: {",
+					"          mode: 'urlencoded',",
+					"            urlencoded : [",
+					"                {key: 'grant_type', value: 'password'},",
+					"                {key: 'user_role', value: 'users'},",
+					"                {key: 'client_id', value: pm.variables.get(\"API_Client_Id\")},",
+					"                {key: 'scope', value: pm.variables.get(\"API_Client_Scopes\")},",
+					"                {key: 'username', value: pm.variables.get(\"OpenEMR_Username\")},",
+					"                {key: 'password', value:  pm.variables.get(\"OpenEMR_Password\")},",
+					"            ]",
+					"        },",
+					"  }, function (err, res) {",
+					"        pm.environment.set(\"Bearer_Token\", res.json().access_token);",
+					"        pm.environment.set(\"Bearer_Token_Timestamp\", new Date());",
+					"        ",
+					"        // Set the ExpiresInTime variable to the time given in the response if it exists",
+					"        if(res.json().expires_in){",
+					"            expiresInTime = res.json().expires_in;",
+					"        }",
+					"        pm.environment.set(\"ExpiresInTime\", expiresInTime);",
+					"  });",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Auth_Url",
+			"value": "http://localhost/openemr/oauth2/default/token",
+			"type": "string"
+		},
+		{
+			"key": "Basic_Auth",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "API_Client_Id",
+			"value": "NaH9lIiOrRc_opTYp3fcr7kXcy2nbtNqKXqtJc60FIU",
+			"type": "string"
+		},
+		{
+			"key": "API_Client_Scopes",
+			"value": "offline_access openid api:oemr api:fhir api:port user/allergy.read user/allergy.write user/appointment.read user/appointment.write user/dental_issue.read user/dental_issue.write user/document.read user/document.write user/drug.read user/encounter.read user/encounter.write user/facility.read user/facility.write user/immunization.read user/insurance.read user/insurance.write user/insurance_company.read user/insurance_company.write user/insurance_type.read user/list.read user/medical_problem.read user/medical_problem.write user/medication.read user/medication.write user/message.write user/patient.read user/patient.write user/practitioner.read user/practitioner.write user/prescription.read user/procedure.read user/soap_note.read user/soap_note.write user/surgery.read user/surgery.write user/vital.read user/vital.write user/AllergyIntolerance.read user/CareTeam.read user/Condition.read user/Encounter.read user/Immunization.read user/Location.read user/Medication.read user/MedicationRequest.read user/Observation.read user/Organization.read user/Organization.write user/Patient.read user/Patient.write user/Practitioner.read user/Practitioner.write user/PractitionerRole.read user/Procedure.read patient/encounter.read patient/patient.read patient/Encounter.read patient/Patient.read",
+			"type": "string"
+		},
+		{
+			"key": "OpenEMR_Username",
+			"value": "MKI-admin-52",
+			"type": "string"
+		},
+		{
+			"key": "OpenEMR_Password",
+			"value": "passwordpassword",
+			"type": "string"
+		},
+		{
+			"key": "Patient_Id",
+			"value": "997b2575-920c-463a-a39b-d219575065df",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
